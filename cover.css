@@ -1,9 +1,12 @@
+/* Styles généraux */
 body {
     background-color: #000000;
     color: white;
+    margin: 0;
+    font-family: Arial, sans-serif;
 }
 
-
+/* Section Hero */
 .hero {
     height: 100vh;
     display: flex;
@@ -13,52 +16,73 @@ body {
     background: url('img/fond_2.jpg') no-repeat center center/cover;
     margin: 60px;
 }
+
 .h1 {
     font-size: 4rem;
     font-weight: bold;
 }
+
+/* Suppression de l'image de fond sur mobile */
+@media (max-width: 768px) {
+    .hero {
+        background: none;
+        margin: 20px;
+    }
+}
+
+/* Section générale */
 .section {
     padding: 80px 0;
 }
 
+/* Navigation */
 .nav {
     background-color: #000000;
     color: white;
-
 }
 
-/* Alignement des icônes dans la barre de navigation */
+/* Icônes dans la barre de navigation */
 .navbar .icon {
-    width: 100%; /* Taille uniforme pour les icônes */
+    width: 100%;
     height: 40px;
     object-fit: cover;
     transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-/* Animation au survol */
 .navbar .icon:hover {
     transform: scale(1.1);
     opacity: 0.8;
 }
 
-/* Ajout d'espace à droite des icônes */
+/* Espacement des icônes */
 .navbar .d-flex a {
     margin-left: 20px;
 }
 
-
-
-
+/* Grille des projets */
 .project-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Exactement 3 colonnes */
-    gap: 20px; /* Espace entre les éléments */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
     justify-content: center;
 }
 
+/* Responsive */
+@media (max-width: 768px) {
+    .project-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .project-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 .project-item {
-    width: 100%; /* Prend la largeur de sa colonne */
-    aspect-ratio: 1; /* Forme carrée */
+    width: 100%;
+    aspect-ratio: 1;
     overflow: hidden;
     position: relative;
     cursor: pointer;
@@ -101,13 +125,9 @@ body {
     font-weight: bold;
     text-transform: uppercase;
     text-align: center;
-    margin: 0;
 }
 
-
-
-
-/* Barre de navigation */
+/* Filtrage des projets */
 .project-filter .nav-link {
     color: white;
     margin: 0 10px;
@@ -119,23 +139,22 @@ body {
 
 .project-filter .nav-link.active,
 .project-filter .nav-link:hover {
-    color: #f39c12; /* Couleur active ou au survol */
+    color: #f39c12;
 }
 
-
-
+/* Pied de page */
 .site-footer {
     background-color: #000000;
     color: white;
     padding: 20px 40px;
-    border-top: 1px solid #444; /* Ligne fine en haut */
+    border-top: 1px solid #444;
 }
 
 .footer-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap; /* Pour l'adaptabilité */
+    flex-wrap: wrap;
 }
 
 .footer-left {
@@ -192,9 +211,7 @@ body {
     }
 }
 
-
-
-
+/* Timeline */
 .timeline {
     padding: 50px 20px;
     position: relative;
@@ -204,7 +221,7 @@ body {
     text-align: center;
     font-size: 5rem;
     margin-top: 100px;
-    margin-bottom: 100px ;
+    margin-bottom: 100px;
     text-transform: uppercase;
     letter-spacing: 2px;
 }
@@ -214,8 +231,6 @@ body {
     max-width: 1200px;
     margin: 0 auto;
 }
-
-
 
 .timeline-item {
     display: flex;
@@ -231,15 +246,6 @@ body {
     justify-content: flex-start;
 }
 
-
-.timeline-item.left::before {
-    right: -20px;
-}
-
-.timeline-item.right::before {
-    left: -20px;
-}
-
 .timeline-content {
     background-color: #111;
     padding: 20px;
@@ -250,7 +256,6 @@ body {
 .timeline-img-right {
     max-width: 20%;
 }
-
 
 .timeline-content h3 {
     font-size: 1.5rem;
@@ -280,12 +285,30 @@ body {
     z-index: 1;
 }
 
+/* Responsive timeline */
+@media (max-width: 768px) {
+    .timeline-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 
+    .timeline-container::after {
+        left: 20px;
+        transform: none;
+    }
+
+    .timeline-content {
+        margin-left: 40px;
+    }
+}
+
+/* Audio */
 audio {
     border-radius: 10px;
     outline: none;
 }
 
+/* Cartes */
 .card {
     border-radius: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
@@ -308,49 +331,4 @@ audio {
     object-fit: cover;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-}
-
-
-
-
-/* Responsive */
-@media (max-width: 768px) {
-    .timeline-item {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .timeline-item.left,
-    .timeline-item.right {
-        justify-content: flex-start;
-    }
-
-    .timeline-container::after {
-        left: 20px;
-        transform: none;
-    }
-
-    .timeline-item::before {
-        left: 10px;
-        right: auto;
-    }
-
-    .timeline-content {
-        margin-left: 40px;
-    }
-}
-
-
-
-
-@media (max-width: 768px) {
-    .project-grid {
-        grid-template-columns: repeat(2, 1fr); /* 2 colonnes sur tablettes */
-    }
-}
-
-@media (max-width: 480px) {
-    .project-grid {
-        grid-template-columns: 1fr; /* 1 colonne sur mobiles */
-    }
 }
