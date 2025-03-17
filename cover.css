@@ -81,11 +81,6 @@ body {
     }
 }
 
-@media (max-width: 480px) {
-    .project-grid {
-        grid-template-columns: 1fr;
-    }
-}
 
 
 .project-title {
