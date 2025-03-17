@@ -1,0 +1,10 @@
+.text-center img{
+    max-width: 1000px;
+    padding-bottom: 50px;
+}
+
+
+.col img {
+    max-width: 400px;
+    margin-bottom: 50px;
+}

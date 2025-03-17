@@ -1,0 +1,357 @@
+body {
+    background-color: #000000;
+    color: white;
+    /*cursor: url('../img/pinceau.png') 32 32, auto;*/
+}
+
+
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: url('../img/fond_2.jpg') no-repeat center center/cover;
+    margin: 60px;
+}
+.h1 {
+    font-size: 4rem;
+    font-weight: bold;
+}
+.section {
+    padding: 80px 0;
+}
+
+.nav {
+    background-color: #000000;
+    color: white;
+
+}
+
+/* Alignement des icônes dans la barre de navigation */
+.navbar .icon {
+    width: 100%; /* Taille uniforme pour les icônes */
+    height: 40px;
+    object-fit: cover;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Animation au survol */
+.navbar .icon:hover {
+    transform: scale(1.1);
+    opacity: 0.8;
+}
+
+/* Ajout d'espace à droite des icônes */
+.navbar .d-flex a {
+    margin-left: 20px;
+}
+
+
+
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Exactement 3 colonnes */
+    gap: 20px; /* Espace entre les éléments */
+    justify-content: center;
+}
+
+.project-item {
+    width: 100%; /* Prend la largeur de sa colonne */
+    aspect-ratio: 1; /* Forme carrée */
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+}
+
+.project-card {
+    width: 100%;
+    height: 100%;
+}
+
+.project-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+/* Overlay pour le titre */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s ease;
+}
+
+.project-card:hover .overlay {
+    opacity: 1;
+}
+
+.project-title {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 0;
+}
+
+
+
+
+/* Barre de navigation */
+.project-filter .nav-link {
+    color: white;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding-bottom: 50px;
+}
+
+.project-filter .nav-link.active,
+.project-filter .nav-link:hover {
+    color: #f39c12; /* Couleur active ou au survol */
+}
+
+
+
+.site-footer {
+    background-color: #000000;
+    color: white;
+    padding: 20px 40px;
+    border-top: 1px solid #444; /* Ligne fine en haut */
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Pour l'adaptabilité */
+}
+
+.footer-left {
+    text-align: left;
+}
+
+.footer-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.footer-email {
+    font-size: 1rem;
+    font-style: italic;
+    color: #ccc;
+}
+
+.footer-right {
+    text-align: right;
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.icon-link {
+    color: white;
+    font-size: 1.5rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.icon-link:hover {
+    color: #f39c12;
+    transform: scale(1.1);
+}
+
+.footer-copyright {
+    font-size: 0.9rem;
+    color: #ccc;
+}
+
+/* Responsivité */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-right {
+        margin-top: 20px;
+    }
+}
+
+
+
+
+.timeline {
+    padding: 50px 20px;
+    position: relative;
+}
+
+.timeline-title {
+    text-align: center;
+    font-size: 5rem;
+    margin-top: 100px;
+    margin-bottom: 100px ;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.timeline-container {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+
+
+.timeline-item {
+    display: flex;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.timeline-item.left {
+    justify-content: flex-end;
+}
+
+.timeline-item.right {
+    justify-content: flex-start;
+}
+
+
+.timeline-item.left::before {
+    right: -20px;
+}
+
+.timeline-item.right::before {
+    left: -20px;
+}
+
+.timeline-content {
+    background-color: #111;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    max-width: 300px;
+}
+
+.timeline-img-right {
+    max-width: 20%;
+}
+
+
+.timeline-content h3 {
+    font-size: 1.5rem;
+    margin: 0 0 10px;
+}
+
+.timeline-content h4 {
+    font-size: 1.25rem;
+    margin: 0 0 10px;
+}
+
+.timeline-content p {
+    font-size: 1rem;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.timeline-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 100%;
+    background-color: #444;
+    z-index: 1;
+}
+
+
+audio {
+    border-radius: 10px;
+    outline: none;
+}
+
+.card {
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card p {
+    font-size: 1rem;
+    font-style: italic;
+    text-align: center;
+}
+
+.cover-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+
+
+
+/* Responsive */
+@media (max-width: 768px) {
+    .timeline-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .timeline-item.left,
+    .timeline-item.right {
+        justify-content: flex-start;
+    }
+
+    .timeline-container::after {
+        left: 20px;
+        transform: none;
+    }
+
+    .timeline-item::before {
+        left: 10px;
+        right: auto;
+    }
+
+    .timeline-content {
+        margin-left: 40px;
+    }
+}
+
+
+
+
+@media (max-width: 768px) {
+    .project-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 colonnes sur tablettes */
+    }
+}
+
+@media (max-width: 480px) {
+    .project-grid {
+        grid-template-columns: 1fr; /* 1 colonne sur mobiles */
+    }
+}
