@@ -298,22 +298,43 @@ body {
     z-index: 1;
 }
 
-/* Responsive timeline */
+
+/* Suppression de la barre grise sur mobile */
 @media (max-width: 768px) {
-    .timeline-item {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
     .timeline-container::after {
-        left: 20px;
-        transform: none;
-    }
-
-    .timeline-content {
-        margin-left: 40px;
+        display: none; /* Cache la barre de séparation */
     }
 }
+
+/* Timeline Items sur mobile */
+@media (max-width: 768px) {
+    /* Centrer les éléments et les empiler verticalement */
+    .timeline-item {
+        flex-direction: column;
+        align-items: center; /* Centrer le contenu */
+        text-align: center; /* Centrer le texte */
+    }
+
+    /* Ajuster l'image à une taille appropriée sans déformation */
+    .timeline-img-right {
+        max-width: 80%; /* Ajuster la taille de l'image sur mobile */
+        height: auto; /* Conserver les proportions de l'image */
+        margin: 20px; /* Espacement entre l'image et le texte */
+    }
+
+    /* Ajuster le contenu de la timeline pour être centré */
+    .timeline-content {
+        max-width: 80%; /* Limiter la largeur du texte */
+        text-align: center; /* Centrer le texte */
+    }
+
+    /* Assurer un bon espacement entre les items */
+    .timeline-item {
+        margin-bottom: 20px; /* Espacement entre chaque entrée */
+    }
+}
+
+
 
 /* Audio */
 audio {
