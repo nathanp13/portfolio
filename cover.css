@@ -14,7 +14,6 @@ body {
     justify-content: center;
     text-align: center;
     background: url('img/fond_2.jpg') no-repeat center center/cover;
-    margin: 60px;
 }
 
 .h1 {
@@ -25,8 +24,8 @@ body {
 /* Suppression de l'image de fond sur mobile */
 @media (max-width: 768px) {
     .hero {
-        background: none;
-        margin: 20px;
+        background: url('img/fond.jpg') no-repeat center ;
+        background-size: contain;
     }
 }
 
@@ -68,6 +67,14 @@ body {
 }
 
 /* Responsive */
+
+@media (max-width: 768px) {
+    .project-filter {
+        display: none;
+    }
+}
+
+
 @media (max-width: 768px) {
     .project-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -79,6 +86,16 @@ body {
         grid-template-columns: 1fr;
     }
 }
+
+
+.project-title {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 100px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
 
 .project-item {
     width: 100%;
@@ -219,12 +236,13 @@ body {
 
 .timeline-title {
     text-align: center;
-    font-size: 5rem;
-    margin-top: 100px;
+    font-size: 3rem;
+    margin-top: 20px;
     margin-bottom: 100px;
     text-transform: uppercase;
     letter-spacing: 2px;
 }
+
 
 .timeline-container {
     position: relative;
