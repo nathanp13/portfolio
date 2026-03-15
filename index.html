@@ -4,352 +4,1614 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="cover.css">
-</head>
+    <title>Nathan Perissat — Portfolio</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%230a0a0a'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' fill='%23f2efe8' font-family='serif' font-size='16' font-weight='bold'>NP.</text></svg>">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --ink: #0a0a0a;
+            --paper: #f2efe8;
+            --cream: #e8e4db;
+            --accent: #c4441a;
+            --accent-light: #e8652f;
+            --muted: #8a8578;
+            --rule: #d4d0c7;
+            --sans: 'DM Sans', sans-serif;
+            --serif: 'Playfair Display', serif;
+            --mono: 'JetBrains Mono', monospace;
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--sans);
+            background: var(--paper);
+            color: var(--ink);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            background-size: 256px 256px;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* ─── LOADER ─── */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--ink);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-text {
+            font-family: var(--serif);
+            font-size: clamp(2rem, 6vw, 5rem);
+            color: var(--paper);
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            animation: loaderPulse 0.5s ease-in-out infinite;
+        }
+
+        @keyframes loaderPulse {
+
+            0%,
+            100% {
+                opacity: 0.3;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* ─── CURSOR ─── */
+        .cursor-dot {
+            width: 10px;
+            height: 10px;
+            background: var(--accent);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            transition: transform 0.15s ease;
+            mix-blend-mode: difference;
+        }
+
+        .cursor-dot.active {
+            transform: scale(4);
+            background: var(--accent-light);
+        }
+
+        /* ─── NAV ─── */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            mix-blend-mode: difference;
+        }
+
+        .nav-logo {
+            font-family: var(--serif);
+            font-size: 1.1rem;
+            font-weight: 900;
+            color: var(--paper);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--paper);
+            text-decoration: none;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0%;
+            height: 1px;
+            background: var(--accent-light);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* ─── HERO ─── */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--ink);
+        }
+
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40%;
+            background: linear-gradient(to top, var(--ink), transparent);
+        }
+
+        .hero-grid-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.06;
+        }
+
+        .hero-grid-lines .h-line {
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            background: var(--paper);
+        }
+
+        .hero-grid-lines .v-line {
+            position: absolute;
+            height: 100%;
+            width: 1px;
+            background: var(--paper);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-eyebrow {
+            font-family: var(--mono);
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: var(--accent-light);
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards 1.5s;
+        }
+
+        .hero-title {
+            font-family: var(--serif);
+            font-size: clamp(3rem, 10vw, 9rem);
+            font-weight: 900;
+            line-height: 0.9;
+            color: var(--paper);
+            letter-spacing: -0.04em;
+            margin-bottom: 2rem;
+        }
+
+        .hero-title span {
+            display: block;
+            opacity: 0;
+            transform: translateY(60px);
+            animation: fadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        .hero-title span:nth-child(1) {
+            animation-delay: 1s;
+        }
+
+        .hero-title span:nth-child(2) {
+            animation-delay: 1s;
+        }
+
+        .hero-sub {
+            font-family: var(--sans);
+            font-size: 1rem;
+            font-weight: 300;
+            color: var(--muted);
+            max-width: 500px;
+            line-height: 1.6;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards 2.2s;
+        }
+
+        .hero-sub strong {
+            color: var(--paper);
+            font-weight: 500;
+        }
+
+        .hero-scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            right: 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            z-index: 2;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards 2.5s;
+        }
+
+        .hero-scroll-indicator span {
+            font-family: var(--mono);
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--muted);
+            writing-mode: vertical-rl;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 60px;
+            background: var(--muted);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scroll-line::after {
+            content: '';
+            position: absolute;
+            top: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--accent-light);
+            animation: scrollDown 2s ease-in-out infinite;
+        }
+
+        /* ─── HERO PHOTO ─── */
+        .hero-photo {
+            position: absolute;
+            right: 5%;
+            bottom: 0;
+            width: 32%;
+            max-width: 400px;
+            height: 80%;
+            z-index: 1;
+            opacity: 0;
+            animation: fadeUp 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards 2s;
+            pointer-events: none;
+        }
+
+        .hero-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scrollDown {
+            0% {
+                top: -100%;
+            }
+
+            100% {
+                top: 100%;
+            }
+        }
+
+        /* ─── SECTION HEADER ─── */
+        .section-header {
+            padding: 6rem 3rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .section-header h2 {
+            font-family: var(--serif);
+            font-size: clamp(2rem, 5vw, 4rem);
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            line-height: 1;
+        }
+
+        .section-header .section-count {
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--muted);
+        }
+
+        /* ─── PROJECTS GRID ─── */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .project-card {
+            border-right: 1px solid var(--rule);
+            border-bottom: 1px solid var(--rule);
+            padding: 2.5rem;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: background 0.4s ease;
+            text-decoration: none;
+            color: inherit;
+            display: grid;
+            grid-template-columns: 1fr 140px;
+            align-items: start;
+            gap: 1.5rem;
+        }
+
+        .project-card:nth-child(2n) {
+            border-right: none;
+        }
+
+        .project-card:hover {
+            background: var(--cream);
+        }
+
+        .project-card-inner {
+            position: relative;
+            z-index: 2;
+        }
+
+        .project-number {
+            font-family: var(--mono);
+            font-size: 0.65rem;
+            color: var(--accent);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .project-card-title {
+            font-family: var(--serif);
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            margin-bottom: 0.75rem;
+            transition: color 0.3s ease;
+        }
+
+        .project-card:hover .project-card-title {
+            color: var(--accent);
+        }
+
+        .project-card-desc {
+            font-size: 0.85rem;
+            color: var(--muted);
+            line-height: 1.5;
+            max-width: 400px;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .project-tag {
+            font-family: var(--mono);
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 0.3rem 0.6rem;
+            border: 1px solid var(--rule);
+            border-radius: 2px;
+            color: var(--muted);
+        }
+
+        /* ─── PROJECT CARD THUMBNAIL ─── */
+        .project-card-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.75rem;
+        }
+
+        .project-card-arrow {
+            width: 32px;
+            height: 32px;
+            border: 1px solid var(--rule);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .project-card-arrow svg {
+            width: 14px;
+            height: 14px;
+            stroke: var(--muted);
+            transition: all 0.3s ease;
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .project-card:hover .project-card-arrow {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .project-card:hover .project-card-arrow svg {
+            stroke: var(--paper);
+            transform: translate(2px, -2px);
+        }
+
+        .project-card-thumb {
+            width: 140px;
+            height: 95px;
+            border-radius: 6px;
+            overflow: hidden;
+            background: var(--cream);
+            border: 1px solid var(--rule);
+            flex-shrink: 0;
+        }
+
+        .project-card-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .project-card:hover .project-card-thumb img {
+            transform: scale(1.05);
+        }
+
+        .project-card-thumb-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--mono);
+            font-size: 0.5rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            text-align: center;
+            padding: 0.5rem;
+        }
+
+        /* ─── ABOUT ─── */
+        .about {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .about-left {
+            padding: 4rem 3rem;
+            border-right: 1px solid var(--rule);
+        }
+
+        .about-right {
+            padding: 4rem 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .about-eyebrow {
+            font-family: var(--mono);
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-title {
+            font-family: var(--serif);
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--muted);
+            margin-bottom: 1rem;
+        }
+
+        .about-text strong {
+            color: var(--ink);
+            font-weight: 500;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .skill-item {
+            padding: 1rem;
+            border: 1px solid var(--rule);
+            border-radius: 4px;
+        }
+
+        .skill-item-label {
+            font-family: var(--mono);
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-item-content {
+            font-size: 0.8rem;
+            color: var(--muted);
+            line-height: 1.4;
+        }
+
+        /* ─── FORMATION ─── */
+        .formation {
+            padding: 4rem 3rem;
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .formation-eyebrow {
+            font-family: var(--mono);
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: var(--accent);
+            margin-bottom: 2rem;
+        }
+
+        .formation-items {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .formation-item {
+            display: grid;
+            grid-template-columns: 120px 1fr auto;
+            align-items: center;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--rule);
+            gap: 0.5rem;
+        }
+
+        .formation-year {
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            color: var(--accent);
+            letter-spacing: 0.05em;
+        }
+
+        .formation-title-wrap {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .formation-logo {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            object-fit: contain;
+            flex-shrink: 0;
+            background: white;
+            padding: 3px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        .formation-title-text {
+            font-family: var(--serif);
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .formation-school {
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        /* ─── CONTACT ─── */
+        .contact {
+            background: var(--ink);
+            padding: 6rem 3rem;
+            color: var(--paper);
+            text-align: center;
+        }
+
+        .contact-eyebrow {
+            font-family: var(--mono);
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: var(--accent-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-title {
+            font-family: var(--serif);
+            font-size: clamp(2rem, 5vw, 4rem);
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            margin-bottom: 2rem;
+        }
+
+        .contact-email {
+            font-family: var(--mono);
+            font-size: 1rem;
+            color: var(--accent-light);
+            text-decoration: none;
+            border-bottom: 1px solid var(--accent-light);
+            padding-bottom: 2px;
+            transition: color 0.3s;
+        }
+
+        .contact-email:hover {
+            color: var(--paper);
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-links a {
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-links a:hover {
+            color: var(--paper);
+        }
+
+        .footer-bottom {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-family: var(--mono);
+            font-size: 0.6rem;
+            color: var(--muted);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        /* ─── PROJECT PAGE ─── */
+        .project-page {
+            display: none;
+            min-height: 100vh;
+        }
+
+        .project-page.active {
+            display: block;
+        }
+
+        .home-page.hidden {
+            display: none;
+        }
+
+        .project-hero {
+            height: 60vh;
+            min-height: 450px;
+            background: var(--ink);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .project-back {
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--muted);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            transition: color 0.3s;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+
+        .project-back:hover {
+            color: var(--paper);
+        }
+
+        .project-back svg {
+            width: 14px;
+            height: 14px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .project-hero-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-hero-tag {
+            font-family: var(--mono);
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 0.3rem 0.7rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            color: var(--accent-light);
+        }
+
+        .project-hero-title {
+            font-family: var(--serif);
+            font-size: clamp(2.5rem, 7vw, 6rem);
+            font-weight: 900;
+            color: var(--paper);
+            letter-spacing: -0.04em;
+            line-height: 0.95;
+            margin-bottom: 1rem;
+        }
+
+        .project-hero-subtitle {
+            font-size: 1rem;
+            font-weight: 300;
+            color: var(--muted);
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        .project-info-bar {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .project-info-item {
+            padding: 1.5rem 2rem;
+            border-right: 1px solid var(--rule);
+        }
+
+        .project-info-item:last-child {
+            border-right: none;
+        }
+
+        .project-info-label {
+            font-family: var(--mono);
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .project-info-value {
+            font-size: 0.85rem;
+            color: var(--ink);
+            line-height: 1.4;
+        }
+
+        .project-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 4rem 3rem;
+        }
+
+        .project-section-title {
+            font-family: var(--serif);
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .project-section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.2em;
+            width: 4px;
+            height: 1.2em;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .project-body {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 3rem;
+        }
+
+        .project-gallery {
+            padding: 0 3rem 4rem;
+        }
+
+        .project-gallery-title {
+            font-family: var(--mono);
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: var(--accent);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+
+        .gallery-item {
+            aspect-ratio: auto;
+            background: var(--cream);
+            border-radius: 4px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gallery-item-placeholder {
+            font-family: var(--mono);
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--muted);
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .project-cta {
+            text-align: center;
+            padding: 3rem;
+            border-top: 1px solid var(--rule);
+        }
+
+        .project-nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+        }
+
+        .project-nav-link {
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--muted);
+            text-decoration: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0.5rem 1rem;
+            transition: color 0.3s;
+        }
+
+        .project-nav-link:hover {
+            color: var(--accent);
+        }
+
+        /* ─── MARQUEE ─── */
+        .marquee-section {
+            overflow: hidden;
+            border-bottom: 1px solid var(--rule);
+            padding: 1.5rem 0;
+        }
+
+        .marquee-track {
+            display: flex;
+            width: max-content;
+            animation: marquee 30s linear infinite;
+        }
+
+        .marquee-item {
+            font-family: var(--serif);
+            font-size: 1.2rem;
+            font-weight: 400;
+            font-style: italic;
+            white-space: nowrap;
+            padding: 0 2rem;
+            color: var(--muted);
+        }
+
+        .marquee-item .dot {
+            color: var(--accent);
+            margin: 0 1rem;
+        }
+
+        @keyframes marquee {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 900px) {
+            .nav {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                padding: 2rem 1.5rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-card {
+                border-right: none;
+                grid-template-columns: 1fr;
+            }
+
+            .project-card-right {
+                flex-direction: row-reverse;
+                justify-content: space-between;
+                width: 100%;
+            }
+
+            .project-card-thumb {
+                width: 100%;
+                height: 120px;
+            }
+
+            .about {
+                grid-template-columns: 1fr;
+            }
+
+            .about-left {
+                border-right: none;
+                border-bottom: 1px solid var(--rule);
+            }
+
+            .section-header {
+                padding: 4rem 1.5rem 1.5rem;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .formation {
+                padding: 3rem 1.5rem;
+            }
+
+            .formation-item {
+                grid-template-columns: 80px 1fr;
+                gap: 0.5rem;
+            }
+
+            .formation-school {
+                grid-column: 2;
+            }
+
+            .project-info-bar {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .project-info-item:nth-child(2) {
+                border-right: none;
+            }
+
+            .project-content {
+                padding: 3rem 1.5rem;
+            }
+
+            .project-gallery {
+                padding: 0 1.5rem 3rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact {
+                padding: 4rem 1.5rem;
+            }
+
+            .hero-scroll-indicator {
+                display: none;
+            }
+
+            .cursor-dot {
+                display: none;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-photo {
+                width: 40%;
+                right: 2%;
+                height: 55%;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero-photo {
+                display: none;
+            }
+        }
+
+        /* ─── SCROLL ANIMATIONS ─── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
 
 <body>
 
-    <nav class="navbar navbar-expand bg-black fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="index.html">Nathan Perissat</a>
-    
-            <!-- Icônes tout à droite -->
-            <div class="d-flex align-items-center">
-                <a href="https://fr.linkedin.com/in/nathan-perissat-0a36552bb" target="_blank" class="d-flex align-items-center me-3">
-                    <img src="img/linkedin.png" alt="LinkedIn" width="35" height="35" class="icon">
-                </a>
-                <a href="#" class="d-flex align-items-center">
-                    <img src="img/wood.jpg" alt="Logo Wood" width="35" height="35" class="icon">
-                </a>
-            </div>
-        </div>
+    <!-- LOADER -->
+    <div class="loader" id="loader"><span class="loader-text">NP.</span></div>
+
+    <!-- CURSOR -->
+    <div class="cursor-dot" id="cursor"></div>
+
+    <!-- NAV -->
+    <nav class="nav">
+        <a class="nav-logo" onclick="showHome()">NP.</a>
+        <ul class="nav-links">
+            <li><a onclick="showHome()">Projets</a></li>
+            <li><a href="#about-section" onclick="showHome()">À propos</a></li>
+            <li><a href="#contact-section" onclick="showHome()">Contact</a></li>
+        </ul>
     </nav>
-    
 
+    <!-- ══════ HOME ══════ -->
+    <div class="home-page" id="homePage">
 
-
-    <header class="hero">
-    </header>
-
-
-    <section id="projects" class="section">
-        <div class="container text-center">
-            <!-- Barre de navigation pour filtrer les projets -->
-            <nav class="project-filter">
-                <ul class="nav justify-content-center mb-4">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#" data-filter="all">Tous mes Projets</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" data-filter="perso">Projets personnels</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" data-filter="strat">Stratégie de Communication</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" data-filter="musique">Musique</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" data-filter="ux">UX Design</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" data-filter="design">Design Graphique</a>
-                    </li>
-                </ul>
-            </nav>
-
-
-
-
-            <!-- Grille des projets -->
-
-            <h2 class="project-title">MES PROJETS</h2>
-
-            <div class="row project-grid">
-                <div class="col-md-4 project-item" data-category="perso">
-                    <div class="project-card">
-                        <img src="img/projet1.png" class="project-image" href="woodblock.html">
-
-                        <a href="woodblock.html">
-                            <div class="overlay">
-                                <h5 class="project-title">WOOD BLOCK</h5>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                    <div class="col-md-4 project-item" data-category="design">
-                        <div class="project-card">
-                            <img src="img/projet3.jpg" class="project-image" href="maillotf1.html">
-
-                            <a href="maillotf1.html">
-                                <div class="overlay">
-                                    <h5 class="project-title">Formule 1 Jersey</h5>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-
-
-                    <!-- <div class="col-md-4 project-item" data-category="3d">
-                        <div class="project-card">
-                            <img src="img/projet2.png" class="project-image">
-                            <div class="overlay">
-                                <h5 class="project-title">Projet Vinyle </h5>
-                            </div>
-                        </div>
-                    </div> -->
-
-
-                        <div class="col-md-4 project-item" data-category="musique">
-                            <div class="project-card">
-                                <img src="img/projet5.jpg" class="project-image" href="musique.html">
-        
-                                <a href="musique.html">
-                                    <div class="overlay">
-                                        <h5 class="project-title">Productions musicales</h5>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-
-
-                    <div class="col-md-4 project-item" data-category="design">
-                        <div class="project-card">
-                            <img src="img/projet6.jpg" class="project-image" href="poster.html">
-
-                            <a href="poster.html">
-                                <div class="overlay">
-                                    <h5 class="project-title">F1 Poster design</h5>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-
-
-                    
-                    <div class="col-md-4 project-item" data-category="strat">
-                        <div class="project-card">
-                            <img src="img/projet7.png" class="project-image" href="sergejuly.html">
-
-                            <a href="sergejuly.html">
-                                <div class="overlay">
-                                    <h5 class="project-title">Rédaction d'une série pour France Culture</h5>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-
-
-                    <!-- <div class="col-md-4 project-item" data-category="3D">
-                        <div class="project-card">
-                            <img src="img/projet8.png" class="project-image">
-                            <div class="overlay">
-                                <h5 class="project-title">Création d'un pendentif</h5>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="col-md-4 project-item" data-category="design">
-                        <div class="project-card">
-                            <img src="img/projet9.jpg" class="project-image">
-                            <div class="overlay">
-                                <h5 class="project-title">Data Visualisation</h5>
-                            </div>
-                        </div>
-                    </div> -->
-
-
-                    <div class="col-md-4 project-item" data-category="ux">
-                        <div class="project-card">
-                            <img src="img/projet10.png" class="project-image" href="submarine.html">
-                            
-                            <a href="submarine.html">
-                            <div class="overlay">
-                                <h5 class="project-title">Application pour Radio France : Submarine</h5>
-                            </div>
-                            </a>
-                        </div>
-                    </div>
-
-
-                    <div class="col-md-4 project-item" data-category="strat">
-                        <div class="project-card">
-                            <img src="img/projet11.jpg" class="project-image" href="marcheaquatique.html">
-                            
-                            <a href="marcheaquatique.html">
-                            <div class="overlay">
-                                <h5 class="project-title">Armor Marche Aquatique</h5>
-                            </div>
-                            </a>
-                        </div>
-                    </div>
-
-
-
-                    <div class="col-md-4 project-item" data-category="strat">
-                        <div class="project-card">
-                            <img src="img/projet12.jpg" class="project-image" href="cola.html">
-
-                            <a href="cola.html">
-                                <div class="overlay">
-                                    <h5 class="project-title">Stratégie de communication pour Breizh Cola</h5>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-
-
-
-                    <div class="col-md-4 project-item" data-category="strat">
-                        <div class="project-card">
-                            <img src="img/projet13.jpg" class="project-image" href="alwest.html">
-
-                            <a href="alwest.html">
-                                <div class="overlay">
-                                    <h5 class="project-title">Plan de communication d'un festival étudiant</h5>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-
+        <section class="hero">
+            <div class="hero-bg">
+                <div class="hero-grid-lines">
+                    <div class="h-line" style="top:20%"></div>
+                    <div class="h-line" style="top:40%"></div>
+                    <div class="h-line" style="top:60%"></div>
+                    <div class="h-line" style="top:80%"></div>
+                    <div class="v-line" style="left:25%"></div>
+                    <div class="v-line" style="left:50%"></div>
+                    <div class="v-line" style="left:75%"></div>
                 </div>
             </div>
-    </section>
-
-
-
-
-    <section class="timeline">
-        <h2 class="timeline-title">MON PARCOURS</h2>
-        <div class="timeline-container">
-            <!-- Entrée 1 -->
-            <div class="timeline-item left">
-                <div class="timeline-content">
-                    <h3>Avril 2025 - Juillet 2025</h3>
-                    <h4>Stage chez RADIO FRANCE : Stratégie numérique de Radio France</h4>
-                    <br>
-                    <p>Dans le cadre d'un stage de 12 semaines, j'ai analysé et participer aux principaux aspects de la
-                        stratégie numérique de Radio France à travers la direction éditoriale de la plateforme Radio
-                        France.</p>
-                    <br>
-                    <p>Lieu : Maison de la Radio, 75016 Paris</p>
-                </div>
-                <div class="timeline-img-right">
-                    <img src="img/radiofrance.jpg" class="project-image">
-                </div>
+            <div class="hero-photo">
+                <img src="Photo.png">
             </div>
-
-            <!-- Entrée 2 -->
-            <div class="timeline-item right">
-                <div class="timeline-content">
-                    <h3>2022-Aujourd'hui</h3>
-                    <h4>BUT Métiers du multimédia et de l'internet</h4>
-                    <br>
-                    <p>Au cours de mon BUT, j'ai pu travailler plusieurs compétences : la stratégie de communication, le
-                        design graphique et le marketing. </p>
-                    <br>
-                    <p>Lieu : IUT de Lannion</p>
-                </div>
-                <div class="timeline-img-right">
-                    <img src="img/mmi.jpg" class="project-image">
-                </div>
+            <div class="hero-content">
+                <p class="hero-eyebrow">Portfolio 2025 — Candidatures Master</p>
+                <h1 class="hero-title">
+                    <span>Nathan</span>
+                    <span>Perissat<em style="color:var(--accent-light)">.</em></span>
+                </h1>
+                <p class="hero-sub">
+                    Étudiant en BUT Métiers du Multimédia et de l'Internet <strong>et auto-entrepreneur</strong> —
+                    Entrepreneuriat, stratégie de communication, UX/UI, gestion de projet et développement web.
+                </p>
             </div>
-
-            <!-- Entrée 3 -->
-            <div class="timeline-item left">
-                <div class="timeline-content">
-                    <h3>2024-Aujourd'hui</h3>
-                    <h4>Employé en vente 12h/week-end chez Urban Soccer</h4>
-                    <br>
-                    <p>Emploi étudiant le week-end chez Urban Soccer, accueil de la clientèle, prise de photos pour les
-                        réseaux sociaux.</p>
-                    <br>
-                    <p>Lieu : Urban Soccer, 35770 Vern sur Seiche</p>
-                </div>
-                <div class="timeline-img-right">
-                    <img src="img/urbansoccer.jpg" class="project-image">
-                </div>
+            <div class="hero-scroll-indicator">
+                <span>Scroll</span>
+                <div class="scroll-line"></div>
             </div>
+        </section>
 
-            <!-- Entrée 4 -->
-            <div class="timeline-item right">
-                <div class="timeline-content">
-                    <h3>2019</h3>
-                    <h4>Stage d'observation en entreprise chez Orange Service</h4>
-                    <br>
-                    <p>Immersion chez Orange Service et visite des différents service (communication, sécurité
-                        informatique, innovation, ...). Ce stage m'a permis de comprendre comment fonctionne une grande
-                        entreprise et comment les différents services travaille entre eux.</p>
-                    <br>
-                    <p>Lieu : Orange Service, 35000 Rennes</p>
-                </div>
-                <div class="timeline-img-right">
-                    <img src="img/orange.jpg" class="project-image">
+        <!-- MARQUEE -->
+        <div class="marquee-section">
+            <div class="marquee-track">
+                <span class="marquee-item">UX Design <span class="dot">•</span> Entrepreneuriat <span
+                        class="dot">•</span> Stratégie de Communication <span class="dot">•</span> Branding <span
+                        class="dot">•</span> Production Musicale <span class="dot">•</span> Développement Web <span
+                        class="dot">•</span> Management <span class="dot">•</span>
+                    <span class="marquee-item">UX Design <span class="dot">•</span> Entrepreneuriat <span
+                            class="dot">•</span> Stratégie de Communication <span class="dot">•</span> Branding <span
+                            class="dot">•</span> Production Musicale <span class="dot">•</span> Développement Web <span
+                            class="dot">•</span> Management <span class="dot">•</span>
+            </div>
+        </div>
+
+        <!-- PROJECTS -->
+        <div class="section-header">
+            <h2>Projets</h2>
+            <span class="section-count">Mes projets</span>
+        </div>
+        <div class="projects-grid" id="projectsGrid"></div>
+
+        <!-- ABOUT -->
+        <div id="about-section"></div>
+        <div class="about reveal">
+            <div class="about-left">
+                <p class="about-eyebrow">À propos</p>
+                <h3 class="about-title">Un profil entre communication digitale, entrepreneuriat et création de projets.
+                </h3>
+                <p class="about-text">
+                    Nathan Perissat, 21 ans, étudiant en troisième année de <strong>Métiers du Multimédia et de
+                        l’Internet.</strong>
+                    Je suis actuellement alternant en communication digitale chez <strong>France Info à Paris</strong>
+                    et fondateur de ProtectQR,
+                    un projet SaaS d’authentification de documents par QR code.
+                </p>
+                <p class="about-text">
+                    Mon parcours m’a permis de développer des <strong>compétences</strong> en stratégie de
+                    communication,
+                    marketing digital, création de contenus et gestion de projet.
+                    À travers mes expériences professionnelles et mes projets,
+                    je m’intéresse particulièrement à la manière dont la technologie, la communication et
+                    l’entrepreneuriat
+                    peuvent se combiner pour créer des produits et des stratégies utiles et innovantes.
+                </p>
+            </div>
+            <div class="about-right">
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <p class="skill-item-label">UX Design</p>
+                        <p class="skill-item-content">Figma, Wireframes, Design d’interface, Photoshop</p>
+                    </div>
+                    <div class="skill-item">
+                        <p class="skill-item-label">Entrepreneuriat</p>
+                        <p class="skill-item-content">Business Model Canvas, Proposition de valeur, Analyse de marché,
+                            Gestion de projet, Pitch</p>
+                    </div>
+                    <div class="skill-item">
+                        <p class="skill-item-label">Développement web</p>
+                        <p class="skill-item-content">HTML/CSS, JavaScript, VS Code, CMS WordPress</p>
+                    </div>
+                    <div class="skill-item">
+                        <p class="skill-item-label">Stratégie de communication</p>
+                        <p class="skill-item-content">Communication digitale, E-mailing, Réseaux sociaux, Rédaction</p>
+                    </div>
+                    <div class="skill-item">
+                        <p class="skill-item-label">Marketing</p>
+                        <p class="skill-item-content">Identité de marque, Personas, Audit, Benchmark</p>
+                    </div>
+                    <div class="skill-item">
+                        <p class="skill-item-label">Production</p>
+                        <p class="skill-item-content">Montage vidéo, Rédaction web, Création de contenus, Production
+                            audio, Suite Adobe</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
 
-
-
-
-    <footer class="site-footer">
-        <div class="footer-container">
-            <div class="footer-left">
-                <h3 class="footer-name">NATHAN PERISSAT</h3>
-                <p class="footer-email">nath.peri04@gmail.com@gmail.com</p>
-            </div>x
-            <div class="footer-right">
-                <div class="social-icons">
-                    <a href="https://fr.linkedin.com/in/nathan-perissat-0a36552bb" class="icon-link"><i class="fab fa-linkedin"></i></a>
+        <!-- FORMATION -->
+        <div class="formation reveal">
+            <p class="formation-eyebrow">Parcours</p>
+            <div class="formation-items">
+                <div class="formation-item">
+                    <span class="formation-year">2023–2026</span>
+                    <span class="formation-title-wrap">
+                        <img class="formation-logo" src="logoiut.png" alt="BUT MMI" onerror="this.style.display='none'">
+                        <span class="formation-title-text">BUT MMI — Métiers du Multimédia et de l'Internet</span>
+                    </span>
+                    <span class="formation-school">IUT de Lannion</span>
                 </div>
-                <p class="footer-copyright">© 2025 – Nathan Perissat. All Rights Reserved</p>
+                <div class="formation-item">
+                    <span class="formation-year">Spetembre 2025 - Septembre 2026</span>
+                    <span class="formation-title-wrap">
+                        <img class="formation-logo" src="logoFI.jpg" alt="Master" onerror="this.style.display='none'">
+                        <span class="formation-title-text">Alternance en communication digitale chez France Info</span>
+                    </span>
+                    <span class="formation-school">France Info, Paris</span>
+                </div>
+                <div class="formation-item">
+                    <span class="formation-year">Avril 2025 - Juillet 2025</span>
+                    <span class="formation-title-wrap">
+                        <img class="formation-logo" src="logoRF.jpg" alt="Radio France"
+                            onerror="this.style.display='none'">
+                        <span class="formation-title-text">Stage chez RADIO FRANCE : Stratégie numérique de Radio
+                            France</span>
+                    </span>
+                    <span class="formation-school">Radio France, Paris</span>
+                </div>
             </div>
         </div>
-    </footer>
 
+        <!-- CONTACT -->
+        <div id="contact-section"></div>
+        <section class="contact">
+            <p class="contact-eyebrow">Contact</p>
+            <h2 class="contact-title">Travaillons ensemble.</h2>
+            <div class="contact-links">
+                <a href="https://fr.linkedin.com/in/nathan-perissat-0a36552bb" target="_blank">LinkedIn</a>
+            </div>
+            <p class="footer-bottom">© 2026 Nathan Perissat — Portfolio</p>
+        </section>
+    </div>
 
-</body>
+    <!-- ══════ PROJECT PAGE ══════ -->
+    <div class="project-page" id="projectPage">
+        <div class="project-hero">
+            <div class="hero-grid-lines" style="opacity:0.04">
+                <div class="h-line" style="top:25%"></div>
+                <div class="h-line" style="top:50%"></div>
+                <div class="h-line" style="top:75%"></div>
+                <div class="v-line" style="left:33%"></div>
+                <div class="v-line" style="left:66%"></div>
+            </div>
+            <div class="project-hero-content">
+                <button class="project-back" onclick="showHome()">
+                    <svg viewBox="0 0 24 24">
+                        <line x1="19" y1="12" x2="5" y2="12" />
+                        <polyline points="12 19 5 12 12 5" />
+                    </svg>
+                    Retour aux projets
+                </button>
+                <div class="project-hero-tags" id="projectHeroTags"></div>
+                <h1 class="project-hero-title" id="projectHeroTitle"></h1>
+                <p class="project-hero-subtitle" id="projectHeroSubtitle"></p>
+            </div>
+        </div>
+        <div class="project-info-bar" id="projectInfoBar"></div>
+        <div class="project-content" id="projectContent"></div>
+        <div class="project-gallery" id="projectGallery"></div>
+        <div class="project-cta">
+            <div class="project-nav-links" id="projectNavLinks"></div>
+        </div>
+        <section class="contact">
+            <p class="contact-eyebrow">Intéressé ?</p>
+            <h2 class="contact-title">Discutons.</h2>
+            <a href="/cdn-cgi/l/email-protection#503e3124387e20352239606410373d31393c7e333f3d" class="contact-email"><span class="__cf_email__" data-cfemail="2c424d5844025c495e451c186c4b414d4540024f4341">[email&#160;protected]</span></a>
+            <p class="footer-bottom" style="margin-top:2rem;">© 2025 Nathan Perissat</p>
+        </section>
+    </div>
 
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        const projects = [
+            {
+                id: "protectqr", number: "01", title: "ProtectQR",
+                shortDesc: "Service SaaS d'authentification de documents par QR Code cryptographique pour lutter contre les fraudes.",
+                tags: ["Entrepreneuriat", "Business model", "Création de valeur"],
+                thumb: "🔒", thumbColor: "#2d5a3d",
+                category: "Entrepreneuriat", year: "2025",
+                role: "Fondateur, & Développeur",
+                tools: "Librairies Javascript, INPI, Figma, Vs Code",
+                client: "Auto-entreprise ProtectQR — projet entrepreneurial",
+                subtitle: "Conception d'un service permettant de vérifier l'authenticité de documents grâce à un QR Code sécurisé.",
+                context: "La fraude documentaire représente un enjeu majeur pour de nombreuses organisations : diplômes falsifiés, attestations modifiées ou certificats manipulés. ProtectQR est né de ce constat. L'idée est de permettre aux organisations d'associer à leurs documents un QR Code cryptographiquement sécurisé permettant de vérifier instantanément leur authenticité.",
+                mission: "J'ai conçu et développé ProtectQR en autonomie complète, depuis la conception du service jusqu'à la réalisation technique de la plateforme. Mon travail a consisté à définir la proposition de valeur, concevoir l'expérience utilisateur, développer l'interface web et structurer le modèle SaaS. L'objectif était de proposer une solution simple d'utilisation permettant à n'importe quel utilisateur de vérifier l'authenticité d'un document en quelques secondes.",
+                results: "ProtectQR permet de générer des QR Codes sécurisés associés à des documents officiels et de vérifier leur authenticité via une interface web dédiée. Le service est enregistré auprès de l'INPI et actuellement en phase de pré-lancement. Ce projet m'a permis de développer des compétences en entrepreneuriat, conception de produit numérique et développement d'une solution innovante.",
+                gallery: [{ label: "Interface de génération de QR Code" }, { label: "Vérification d'un document" }, { label: "Maquettes UX/UI" }],
+                hasVideo: true,
+                videoSrc: "img/protectqr-video.mp4",
+                siteUrl: "https://protectqr.fr"
+            },
+            {
+                id: "tradish", number: "02", title: "Tradish",
+                shortDesc: "Projet marketing de création d'une marque fictive de kits culinaires.",
+                tags: ["Marketing", "Branding", "E-commerce"],
+                thumb: "🍽️", thumbColor: "#5a3d2d",
+                category: "Projet universitaire", year: "2025",
+                role: "Chef de projet marketing",
+                tools: "Google Analytics, Google Sheets, SEO Tracker, Photoshop",
+                client: "Projet marketing fictif — BUT MMI (équipe de 3)",
+                subtitle: "",
+                context: "Tradish est une marque fictive imaginée dans le cadre d'un projet marketing réalisé en troisième année de BUT Métiers du Multimédia et de l'Internet.",
+                mission: "Avec mon équipe, nous avons travaillé sur l'ensemble de la stratégie de marque. Le projet comprenait un audit, une analyse du marché et du positionnement, ainsi que la définition de l'identité et de l'univers de marque. J'ai également participé à la création de la charte graphique, à la conception des maquettes du site web et à la réalisation de plusieurs visuels destinés à illustrer le concept et la communication de la marque.",
+                results: "Le projet a abouti à la réalisation d'un dossier de marque complet de 42 pages comprenant l'analyse du marché, le positionnement marketing, l'identité visuelle et la charte graphique de la marque.",
+                gallery: [{ label: "Identité visuelle Tradish" }, { label: "Maquette site — Desktop" }, { label: "Charte graphique & visuels" }]
+            },
+            {
+                id: "submarine", number: "03", title: "Submarine",
+                shortDesc: "Maquettage UX/UI de l'application Submarine pour Radio France.",
+                tags: ["UX Design", "Stage", "Radio France"],
+                thumb: "📻", thumbColor: "#1a2d5a",
+                category: "Stage", year: "2025",
+                role: "UX-Designer junior",
+                tools: "Figma, Pinterest, API Submarine",
+                client: "Radio France — Stage professionnel",
+                subtitle: "Maquettage et graphisme d'une application Radio France dédiée à la recherche de podcasts.",
+                context: "Lors de mon stage chez Radio France, j'ai eu l'opportunité de travailler sur Submarine, une application de recherche de podcasts qui n'avait pas encore d'interface graphique. Le projet était prêt à être déployé techniquement mais nécessitait une interface utilisateur complète.",
+                mission: "J'ai réalisé la maquette totale de l'application : architecture de l'information, wireframes, design system et maquettes haute fidélité. Chaque écran a été conçu en pensant à l'expérience utilisateur, avec une attention particulière portée à la navigation dans un catalogue de podcasts dense. J'ai utilisé l'API Submarine pour tester et valider mes choix de design.",
+                results: "Mes maquettes ont été validées par l'équipe de Radio France et seront utilisées lors du déploiement de l'application. Cette expérience m'a permis de travailler dans un environnement professionnel exigeant et de comprendre les contraintes d'un projet à l'échelle nationale.",
+                gallery: [{ label: "Interface principale" }, { label: "Recherche de podcasts" }, { label: "Fiche podcast détaillée" }]
+            },
+            {
+                id: "spiderman", number: "04", title: "Workshop Spiderman",
+                shortDesc: "Conception d'une expérience interactive en réalité virtuelle autour de l'univers Spiderman pour un stand événementiel.",
+                tags: ["UX Design", "Gestion de projet", "Gamification"],
+                thumb: "🕷️", thumbColor: "#5a1a1a",
+                category: "Projet universitaire", year: "2026",
+                role: "Chef de projet & UX Designer",
+                tools: "Figma, Suite Adobe, Gantt",
+                client: "Projet académique, troisième année de BUT MMI",
+                subtitle: "Création d'un stand interactif permettant aux visiteurs de découvrir un film d'animation.",
+                context: "Ce projet a été réalisé dans le cadre d'un workshop universitaire. L'objectif était de concevoir une expérience immersive accessible au grand public. Le stand devait accueillir plusieurs dizaines de visiteurs sur une durée limitée, avec un espace restreint et des contraintes logistiques fortes.",
+                mission: "En tant que chef de projet, j'ai coordonné une équipe de cinq personnes et organisé l'ensemble du dispositif : répartition des tâches, respect des délais et préparation du stand pour l'événement. J'ai également travaillé sur l'expérience utilisateur afin de rendre l'interaction simple et fluide pour un public très varié allant de l'étudiant aux élus municipaux.",
+                results: "Le stand a accueilli plusieurs visiteurs tout au long de l'événement. L'expérience immersive a permis de présenter de manière ludique le film d'animation choisi, tout en démontrant l'importance d'une conception UX adaptée à un environnement événementiel.",
+                gallery: [{ label: "Stand interactif" }, { label: "Expérience VR" }, { label: "Interface utilisateur" }]
+            },
+            {
+                id: "mademoiselle-pitch", number: "05", title: "Mademoiselle Pitch Award",
+                shortDesc: "Campagne d'affichage pour SOS Villages d'Enfants — \"Point de Bascule\".",
+                tags: ["Communication", "Marketing", "Design"],
+                thumb: "🏆", thumbColor: "#5a4d1a",
+                category: "Concours", year: "2026",
+                role: "Conception campagne et analyse marketing",
+                tools: "Adobe Photoshop, Figma",
+                client: "SOS Villages d'Enfants — Concours",
+                subtitle: "Création d'une campagne publicitaire complète pour SOS Villages d'Enfants autour du concept \"Point de Bascule\".",
+                context: "Le concours Mademoiselle Pitch m'a donné l'occasion de répondre au brief créatif de SOS Villages d'Enfants. L'enjeu était de sensibiliser le public à la séparation des fratries et d'encourager les dons pour que frères et sœurs puissent grandir ensemble.",
+                mission: "Benchmark et analyse  des campagnes existantes dans le secteur associatif, Définition d’un  axe créatif  en cohérence avec les objectifs du brief, Conception de l’affiche  principale et déclinaison sur différents supports",
+                results: "La campagne a été soumise au jury du concours Mademoiselle Pitch. Le concept repose sur l'angle #1 du brief : mettre en lumière l'injustice subie par ces enfants innocents. Les visuels ont ensuite été déclinés sur plusieurs formats.",
+                gallery: [{ label: "Affiche 4x3" }, { label: "Concept Board complet" }, { label: "Déclinaison abribus" }]
+            },
+            {
+                id: "armor-marche-aquatique", number: "06", title: "Armor Marche Aquatique",
+                shortDesc: "Stratégie de communication complète et refonte visuelle pour une association sportive.",
+                tags: ["Communication", "Identité visuelle", "Réseaux sociaux"],
+                thumb: "🌊", thumbColor: "#1a3d5a",
+                category: "Année", year: "2024",
+                role: "Consultant en communication",
+                tools: "Meta Business Suite, Brevo, Suite Adobe, Figm",
+                client: "Entreprise Armor Marche Aquatique",
+                subtitle: "Accompagnement d'une entreprise pendant cinq mois pour améliorer sa communication globale.",
+                context: "Armor Marche Aquatique est une entreprise proposant des activités de marche aquatique en Bretagne. Leur communication souffrait d'un manque de cohérence visuelle et d'une présence digitale limitée. Ils avaient besoin d'un accompagnement complet pour professionnaliser leur image.",
+                mission: "Pendant cinq mois, j'ai accompagné l'association dans la refonte complète de sa communication : nouvelle identité graphique, stratégie de communication sur les réseaux sociaux, création de posts et de contenu visuel, rédaction d'e-mails, enregistrement d'une vidéo promotionnelle et réalisation d'un site internet vitrine.",
+                results: "L'association dispose désormais d'une identité visuelle cohérente, d'un site internet professionnel et d'une présence active sur les réseaux sociaux. Le benchmark initial a permis d'identifier les bonnes pratiques du secteur et de positionner Armor Marche Aquatique de manière distinctive.",
+                gallery: [{ label: "Identité visuelle" }, { label: "Post réseaux sociaux #1" }, { label: "Post réseaux sociaux #2" }],
+            },
+            {
+                id: "woodblock", number: "07", title: "Wood Block",
+                shortDesc: "Création d'un collectif de beatmakers.",
+                tags: ["Branding", "E-commerce", "Musique"],
+                thumb: "🎵", thumbColor: "#3d2d1a",
+                category: "Année", year: "2023–2024",
+                role: "Fondateur et Directeur créatif",
+                tools: "Adobe Photoshop, Figma, FL Studio, Réseaux Sociaux",
+                client: "Projet personnel",
+                subtitle: "Un collectif de beatmakers passionné par la musique, tous les services réunis sur un seul site internet.",
+                context: "Wood Block est un projet personnel né de ma passion pour la production musicale. L'idée était de créer une marque fédérant un collectif de beatmakers et de proposer une plateforme centralisant nos services : production instrumentale, mixage, arrangement et mastering.",
+                mission: "J'ai conçu l'identité visuelle de la marque (logo, charte graphique, univers visuel), développé la stratégie de communication sur les réseaux sociaux et réalisé le site web e-commerce sur CMS. Parallèlement, j'ai mené une étude des données utilisateurs pour optimiser les campagnes d'e-mailing et la présence en ligne.",
+                results: "Le site propose un catalogue de beats à l'écoute et à l'achat, un système de commande pour des productions sur mesure, et un blog sur l'univers de la beatmaking. La stratégie de communication a permis de créer une communauté engagée autour du collectif.",
+                gallery: [{ label: "Site web Wood Block" }, { label: "Post Instagram #1" }, { label: "Post Instagram #2" }]
+            },
+            {
+                id: "design-poster", number: "08", title: "Design — F1 Posters",
+                shortDesc: "Collection de 24 affiches design pour chaque circuit GP de Formule 1 2025.",
+                tags: ["Design graphique", "Illustration", "Sport Auto"],
+                thumb: "🏎️", thumbColor: "#3d1a1a",
+                category: "Personnel", year: "2023",
+                role: "Designer graphique",
+                tools: "Adobe Photoshop",
+                client: "Projet personnel — Passion F1",
+                subtitle: "Collection de posters créatifs représentant chacun des 24 circuits Grand Prix de la saison 2025 de Formule 1.",
+                context: "En tant que passionné de Formule 1, j'ai voulu allier ma passion du sport automobile à mes compétences en design graphique. L'objectif : créer une collection d'affiches uniques pour chaque Grand Prix de la saison 2025, avec une identité visuelle cohérente tout en reflétant le caractère unique de chaque circuit.",
+                mission: "Pour chaque affiche, j'ai mené une recherche sur l'identité du circuit (architecture locale, paysages, culture), sélectionné des images de référence sur Getty Images, puis composé un visuel distinctif dans Photoshop. Le défi était de maintenir une cohérence graphique globale (grille, typographie, palette) tout en donnant à chaque poster son caractère unique.",
+                results: "La collection complète comprend 24 affiches et un calendrier récapitulatif. Parmi les circuits représentés : Melbourne, Sakhir, Jeddah, Shanghai, Miami, Monaco, Barcelona, Spa, Suzuka, et bien d'autres. Le projet démontre ma capacité à travailler sur une série graphique cohérente à grande échelle.",
+                gallery: [{ label: "Calendrier 2025" }, { label: "GP Monaco" }, { label: "GP Spa-Francorchamps" }]
+            }
+        ];
 
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const filterLinks = document.querySelectorAll('.project-filter .nav-link');
-        const projectItems = document.querySelectorAll('.project-item');
-
-        filterLinks.forEach(link => {
-            link.addEventListener('click', function (e) {
-                e.preventDefault();
-                const filter = this.getAttribute('data-filter');
-
-                // Supprimer la classe "active" des autres liens
-                filterLinks.forEach(link => link.classList.remove('active'));
-                this.classList.add('active');
-
-                // Filtrer les projets
-                projectItems.forEach(item => {
-                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
-                        item.style.display = 'block';
-                    } else {
-                        item.style.display = 'none';
-                    }
-                });
-            });
+        // ─── RENDER PROJECTS GRID ───
+        const grid = document.getElementById('projectsGrid');
+        projects.forEach(p => {
+            const card = document.createElement('a');
+            card.className = 'project-card reveal';
+            card.onclick = () => showProject(p.id);
+            card.innerHTML = `
+            <div class="project-card-inner">
+                <p class="project-number">${p.number} — ${p.tags[0]}</p>
+                <h3 class="project-card-title">${p.title}</h3>
+                <p class="project-card-desc">${p.shortDesc}</p>
+                <div class="project-tags">
+                    ${p.tags.map(t => `<span class="project-tag">${t}</span>`).join('')}
+                </div>
+            </div>
+            <div class="project-card-right">
+                <div class="project-card-arrow">
+                    <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                </div>
+                <div class="project-card-thumb" style="background:${p.thumbColor};">
+                    <img src="img/${p.id}.png" alt="${p.title}" style="width:100%;height:100%;object-fit:cover;">
+                </div>
+            </div>
+        `;
+            grid.appendChild(card);
         });
-    });
-    
-</script>
 
+        // ─── SHOW PROJECT ───
+        function showProject(id) {
+            const p = projects.find(pr => pr.id === id);
+            if (!p) return;
+            document.getElementById('homePage').classList.add('hidden');
+            document.getElementById('projectPage').classList.add('active');
+            window.scrollTo(0, 0);
+            document.getElementById('projectHeroTitle').textContent = p.title;
+            document.getElementById('projectHeroSubtitle').textContent = p.subtitle;
+            document.getElementById('projectHeroTags').innerHTML = p.tags.map(t => `<span class="project-hero-tag">${t}</span>`).join('');
+            document.getElementById('projectInfoBar').innerHTML = `
+            <div class="project-info-item"><p class="project-info-label">${p.category}</p><p class="project-info-value">${p.year}</p></div>
+            <div class="project-info-item"><p class="project-info-label">Rôle</p><p class="project-info-value">${p.role}</p></div>
+            <div class="project-info-item"><p class="project-info-label">Outils</p><p class="project-info-value">${p.tools}</p></div>
+            <div class="project-info-item"><p class="project-info-label">Client</p><p class="project-info-value">${p.client}</p></div>
+        `;
+            document.getElementById('projectContent').innerHTML = `
+            <h3 class="project-section-title">Contexte</h3><p class="project-body">${p.context}</p>
+            <h3 class="project-section-title">Mission</h3><p class="project-body">${p.mission}</p>
+            <h3 class="project-section-title">Résultats</h3><p class="project-body">${p.results}</p>
+        `;
+            document.getElementById('projectGallery').innerHTML = `
+            <p class="project-gallery-title">Visuels du projet</p>
+            <div class="gallery-grid">
+                ${p.gallery.map((g, i) => `
+                    <div class="gallery-item">
+                        <img src="img/${p.id}-${i + 1}.png" alt="${g.label}" onerror="this.src=this.src.replace('.png','.jpg')">
+                    </div>
+                `).join('')}
+            </div>
+            ${p.hasVideo ? `
+            <div style="margin-top:2rem;">
+                <p class="project-gallery-title" style="margin-bottom:1rem;">Vidéo de présentation</p>
+                <div style="width:100%;max-width:800px;margin:0 auto;border-radius:8px;overflow:hidden;background:var(--ink);">
+                    <video controls playsinline preload="metadata" style="width:100%;aspect-ratio:16/9;display:block;object-fit:cover;" poster="img/protectqr-poster.png">
+                        <source src="${p.videoSrc}" type="video/mp4">
+                        Votre navigateur ne supporte pas la lecture vidéo.
+                    </video>
+                </div>
+            </div>
+            ` : ''}
+            ${p.siteUrl ? `
+            <div style="text-align:center;margin-top:2.5rem;">
+                <a href="${p.siteUrl}" target="_blank" rel="noopener" style="
+                    display:inline-flex;align-items:center;gap:0.6rem;
+                    font-family:var(--mono);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.15em;
+                    color:var(--paper);background:var(--accent);
+                    padding:0.9rem 2rem;border-radius:4px;text-decoration:none;
+                    transition:background 0.3s ease,transform 0.2s ease;
+                " onmouseover="this.style.background='var(--accent-light)';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='var(--accent)';this.style.transform='translateY(0)'">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    Voir le site ProtectQR
+                </a>
+            </div>
+            ` : ''}
+        `;
+            const idx = projects.indexOf(p);
+            const prev = projects[idx - 1];
+            const next = projects[idx + 1];
+            let navHTML = '<button class="project-nav-link" onclick="showHome()">← Tous les projets</button>';
+            if (prev) navHTML = `<button class="project-nav-link" onclick="showProject('${prev.id}')">← ${prev.title}</button>` + navHTML;
+            if (next) navHTML += `<button class="project-nav-link" onclick="showProject('${next.id}')">${next.title} →</button>`;
+            document.getElementById('projectNavLinks').innerHTML = navHTML;
+        }
 
+        function showHome() {
+            document.getElementById('homePage').classList.remove('hidden');
+            document.getElementById('projectPage').classList.remove('active');
+            window.scrollTo(0, 0);
+        }
 
+        // ─── LOADER ───
+        window.addEventListener('load', () => { setTimeout(() => { document.getElementById('loader').classList.add('hidden'); }, 1200); });
 
+        // ─── CURSOR ───
+        const cursor = document.getElementById('cursor');
+        document.addEventListener('mousemove', e => { cursor.style.left = e.clientX - 5 + 'px'; cursor.style.top = e.clientY - 5 + 'px'; });
+        document.querySelectorAll('a, button, .project-card').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('active'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
+        });
 
+        // ─── SCROLL REVEAL ───
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
 </html>
