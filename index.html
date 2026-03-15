@@ -1029,18 +1029,73 @@
             }
         }
 
+        /* ─── BURGER MENU ─── */
+        .burger {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            z-index: 101;
+        }
+        .burger span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: var(--paper);
+            margin: 5px 0;
+            transition: all 0.3s ease;
+            border-radius: 1px;
+        }
+        .burger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .burger.open span:nth-child(2) { opacity: 0; }
+        .burger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
         /* ─── RESPONSIVE ─── */
         @media (max-width: 900px) {
             .nav {
                 padding: 1rem 1.5rem;
             }
 
+            .burger { display: block; }
+
             .nav-links {
                 display: none;
+                position: fixed;
+                top: 0; left: 0;
+                width: 100%; height: 100vh;
+                background: rgba(10,10,10,0.97);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 2.5rem;
+                z-index: 100;
+                mix-blend-mode: normal;
+            }
+            .nav-links.open {
+                display: flex;
+            }
+            .nav-links.open a {
+                font-size: 1rem;
+                color: var(--paper);
             }
 
             .hero {
                 padding: 2rem 1.5rem;
+                height: auto;
+                min-height: 70vh;
+                padding-top: 5rem;
+            }
+
+            .hero-eyebrow { margin-bottom: 0.8rem; }
+            .hero-title { font-size: clamp(2.5rem, 12vw, 5rem); margin-bottom: 1rem; }
+            .hero-sub { font-size: 0.9rem; }
+
+            .section-header {
+                padding: 2.5rem 1.5rem 1.5rem;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
             }
 
             .projects-grid {
@@ -1052,15 +1107,14 @@
                 grid-template-columns: 1fr;
             }
 
-            .project-card-right {
-                flex-direction: row-reverse;
-                justify-content: space-between;
-                width: 100%;
-            }
-
             .project-card-thumb {
                 width: 100%;
-                height: 120px;
+                height: 160px;
+                order: -1;
+            }
+
+            .project-card-arrow {
+                display: none;
             }
 
             .about {
@@ -1070,13 +1124,6 @@
             .about-left {
                 border-right: none;
                 border-bottom: 1px solid var(--rule);
-            }
-
-            .section-header {
-                padding: 4rem 1.5rem 1.5rem;
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.5rem;
             }
 
             .formation {
@@ -1166,11 +1213,14 @@
     <!-- NAV -->
     <nav class="nav">
         <a class="nav-logo" onclick="showHome()">NP.</a>
-        <ul class="nav-links">
-            <li><a onclick="showHome()">Projets</a></li>
-            <li><a href="#about-section" onclick="showHome()">À propos</a></li>
-            <li><a href="#contact-section" onclick="showHome()">Contact</a></li>
+        <ul class="nav-links" id="navLinks">
+            <li><a onclick="showHome();closeBurger()">Projets</a></li>
+            <li><a href="#about-section" onclick="showHome();closeBurger()">À propos</a></li>
+            <li><a href="#contact-section" onclick="showHome();closeBurger()">Contact</a></li>
         </ul>
+        <button class="burger" id="burger" onclick="toggleBurger()" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
     </nav>
 
     <!-- ══════ HOME ══════ -->
@@ -1323,8 +1373,10 @@
         <section class="contact">
             <p class="contact-eyebrow">Contact</p>
             <h2 class="contact-title">Travaillons ensemble.</h2>
+            <a href="mailto:nath.peri04@gmail.com" class="contact-email">nath.peri04@gmail.com</a>
             <div class="contact-links">
                 <a href="https://fr.linkedin.com/in/nathan-perissat-0a36552bb" target="_blank">LinkedIn</a>
+                <a href="mailto:nath.peri04@gmail.com">Email</a>
             </div>
             <p class="footer-bottom">© 2026 Nathan Perissat — Portfolio</p>
         </section>
@@ -1362,12 +1414,12 @@
         <section class="contact">
             <p class="contact-eyebrow">Intéressé ?</p>
             <h2 class="contact-title">Discutons.</h2>
-            <a href="/cdn-cgi/l/email-protection#503e3124387e20352239606410373d31393c7e333f3d" class="contact-email"><span class="__cf_email__" data-cfemail="2c424d5844025c495e451c186c4b414d4540024f4341">[email&#160;protected]</span></a>
+            <a href="mailto:nath.peri04@gmail.com" class="contact-email">nath.peri04@gmail.com</a>
             <p class="footer-bottom" style="margin-top:2rem;">© 2025 Nathan Perissat</p>
         </section>
     </div>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
         const projects = [
             {
                 id: "protectqr", number: "01", title: "ProtectQR",
@@ -1590,6 +1642,16 @@
             document.getElementById('homePage').classList.remove('hidden');
             document.getElementById('projectPage').classList.remove('active');
             window.scrollTo(0, 0);
+        }
+
+        // ─── BURGER MENU ───
+        function toggleBurger() {
+            document.getElementById('burger').classList.toggle('open');
+            document.getElementById('navLinks').classList.toggle('open');
+        }
+        function closeBurger() {
+            document.getElementById('burger').classList.remove('open');
+            document.getElementById('navLinks').classList.remove('open');
         }
 
         // ─── LOADER ───
