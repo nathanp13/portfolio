@@ -1,0 +1,269 @@
+[
+  {
+    "id": "protectqr",
+    "number": "01",
+    "title": "ProtectQR",
+    "shortDesc": "Service SaaS d'authentification de documents par QR Code cryptographique pour lutter contre les fraudes.",
+    "tags": [
+      "Entrepreneuriat",
+      "Business model",
+      "Création de valeur"
+    ],
+    "thumb": "🔒",
+    "thumbColor": "#2d5a3d",
+    "category": "Entrepreneuriat",
+    "year": "2025",
+    "role": "Fondateur, & Développeur",
+    "tools": "Librairies Javascript, INPI, Figma, Vs Code",
+    "client": "Auto-entreprise ProtectQR — projet entrepreneurial",
+    "subtitle": "Conception d'un service permettant de vérifier l'authenticité de documents grâce à un QR Code sécurisé.",
+    "context": "La fraude documentaire représente un enjeu majeur pour de nombreuses organisations : diplômes falsifiés, attestations modifiées ou certificats manipulés. ProtectQR est né de ce constat. L'idée est de permettre aux organisations d'associer à leurs documents un QR Code cryptographiquement sécurisé permettant de vérifier instantanément leur authenticité.",
+    "mission": "J'ai conçu et développé ProtectQR en autonomie complète, depuis la conception du service jusqu'à la réalisation technique de la plateforme. Mon travail a consisté à définir la proposition de valeur, concevoir l'expérience utilisateur, développer l'interface web et structurer le modèle SaaS. L'objectif était de proposer une solution simple d'utilisation permettant à n'importe quel utilisateur de vérifier l'authenticité d'un document en quelques secondes.",
+    "results": "ProtectQR permet de générer des QR Codes sécurisés associés à des documents officiels et de vérifier leur authenticité via une interface web dédiée. Le service est enregistré auprès de l'INPI et actuellement en phase de pré-lancement. Ce projet m'a permis de développer des compétences en entrepreneuriat, conception de produit numérique et développement d'une solution innovante.",
+    "gallery": [
+      {
+        "label": "Interface de génération de QR Code"
+      },
+      {
+        "label": "Vérification d'un document"
+      },
+      {
+        "label": "Maquettes UX/UI"
+      }
+    ],
+    "hasVideo": true,
+    "videoSrc": "img/protectqr-video.mp4",
+    "siteUrl": "https://protectqr.fr"
+  },
+  {
+    "id": "tradish",
+    "number": "02",
+    "title": "Tradish",
+    "shortDesc": "Projet marketing de création d'une marque fictive de kits culinaires.",
+    "tags": [
+      "Marketing",
+      "Branding",
+      "E-commerce"
+    ],
+    "thumb": "🍽️",
+    "thumbColor": "#5a3d2d",
+    "category": "Projet universitaire",
+    "year": "2025",
+    "role": "Chef de projet marketing",
+    "tools": "Google Analytics, Google Sheets, SEO Tracker, Photoshop",
+    "client": "Projet marketing fictif — BUT MMI (équipe de 3)",
+    "subtitle": "",
+    "context": "Tradish est une marque fictive imaginée dans le cadre d'un projet marketing réalisé en troisième année de BUT Métiers du Multimédia et de l'Internet.",
+    "mission": "Avec mon équipe, nous avons travaillé sur l'ensemble de la stratégie de marque. Le projet comprenait un audit, une analyse du marché et du positionnement, ainsi que la définition de l'identité et de l'univers de marque. J'ai également participé à la création de la charte graphique, à la conception des maquettes du site web et à la réalisation de plusieurs visuels destinés à illustrer le concept et la communication de la marque.",
+    "results": "Le projet a abouti à la réalisation d'un dossier de marque complet de 42 pages comprenant l'analyse du marché, le positionnement marketing, l'identité visuelle et la charte graphique de la marque.",
+    "gallery": [
+      {
+        "label": "Identité visuelle Tradish"
+      },
+      {
+        "label": "Maquette site — Desktop"
+      },
+      {
+        "label": "Charte graphique & visuels"
+      }
+    ]
+  },
+  {
+    "id": "submarine",
+    "number": "03",
+    "title": "Submarine",
+    "shortDesc": "Maquettage UX/UI de l'application Submarine pour Radio France.",
+    "tags": [
+      "UX Design",
+      "Stage",
+      "Radio France"
+    ],
+    "thumb": "📻",
+    "thumbColor": "#1a2d5a",
+    "category": "Stage",
+    "year": "2025",
+    "role": "UX-Designer junior",
+    "tools": "Figma, Pinterest, API Submarine",
+    "client": "Radio France — Stage professionnel",
+    "subtitle": "Maquettage et graphisme d'une application Radio France dédiée à la recherche de podcasts.",
+    "context": "Lors de mon stage chez Radio France, j'ai eu l'opportunité de travailler sur Submarine, une application de recherche de podcasts qui n'avait pas encore d'interface graphique. Le projet était prêt à être déployé techniquement mais nécessitait une interface utilisateur complète.",
+    "mission": "J'ai réalisé la maquette totale de l'application : architecture de l'information, wireframes, design system et maquettes haute fidélité. Chaque écran a été conçu en pensant à l'expérience utilisateur, avec une attention particulière portée à la navigation dans un catalogue de podcasts dense. J'ai utilisé l'API Submarine pour tester et valider mes choix de design.",
+    "results": "Mes maquettes ont été validées par l'équipe de Radio France et seront utilisées lors du déploiement de l'application. Cette expérience m'a permis de travailler dans un environnement professionnel exigeant et de comprendre les contraintes d'un projet à l'échelle nationale.",
+    "gallery": [
+      {
+        "label": "Interface principale"
+      },
+      {
+        "label": "Recherche de podcasts"
+      },
+      {
+        "label": "Fiche podcast détaillée"
+      }
+    ]
+  },
+  {
+    "id": "spiderman",
+    "number": "04",
+    "title": "Workshop Spiderman",
+    "shortDesc": "Conception d'une expérience interactive en réalité virtuelle autour de l'univers Spiderman pour un stand événementiel.",
+    "tags": [
+      "UX Design",
+      "Gestion de projet",
+      "Gamification"
+    ],
+    "thumb": "🕷️",
+    "thumbColor": "#5a1a1a",
+    "category": "Projet universitaire",
+    "year": "2026",
+    "role": "Chef de projet & UX Designer",
+    "tools": "Figma, Suite Adobe, Gantt",
+    "client": "Projet académique, troisième année de BUT MMI",
+    "subtitle": "Création d'un stand interactif permettant aux visiteurs de découvrir un film d'animation.",
+    "context": "Ce projet a été réalisé dans le cadre d'un workshop universitaire. L'objectif était de concevoir une expérience immersive accessible au grand public. Le stand devait accueillir plusieurs dizaines de visiteurs sur une durée limitée, avec un espace restreint et des contraintes logistiques fortes.",
+    "mission": "En tant que chef de projet, j'ai coordonné une équipe de cinq personnes et organisé l'ensemble du dispositif : répartition des tâches, respect des délais et préparation du stand pour l'événement. J'ai également travaillé sur l'expérience utilisateur afin de rendre l'interaction simple et fluide pour un public très varié allant de l'étudiant aux élus municipaux.",
+    "results": "Le stand a accueilli plusieurs visiteurs tout au long de l'événement. L'expérience immersive a permis de présenter de manière ludique le film d'animation choisi, tout en démontrant l'importance d'une conception UX adaptée à un environnement événementiel.",
+    "gallery": [
+      {
+        "label": "Stand interactif"
+      },
+      {
+        "label": "Expérience VR"
+      },
+      {
+        "label": "Interface utilisateur"
+      }
+    ]
+  },
+  {
+    "id": "mademoiselle-pitch",
+    "number": "05",
+    "title": "Mademoiselle Pitch Award",
+    "shortDesc": "Campagne d'affichage pour SOS Villages d'Enfants — \"Point de Bascule\".",
+    "tags": [
+      "Communication",
+      "Marketing",
+      "Design"
+    ],
+    "thumb": "🏆",
+    "thumbColor": "#5a4d1a",
+    "category": "Concours",
+    "year": "2026",
+    "role": "Conception campagne et analyse marketing",
+    "tools": "Adobe Photoshop, Figma",
+    "client": "SOS Villages d'Enfants — Concours",
+    "subtitle": "Création d'une campagne publicitaire complète pour SOS Villages d'Enfants autour du concept \"Point de Bascule\".",
+    "context": "Le concours Mademoiselle Pitch m'a donné l'occasion de répondre au brief créatif de SOS Villages d'Enfants. L'enjeu était de sensibiliser le public à la séparation des fratries et d'encourager les dons pour que frères et sœurs puissent grandir ensemble.",
+    "mission": "Benchmark et analyse  des campagnes existantes dans le secteur associatif, Définition d’un  axe créatif  en cohérence avec les objectifs du brief, Conception de l’affiche  principale et déclinaison sur différents supports",
+    "results": "La campagne a été soumise au jury du concours Mademoiselle Pitch. Le concept repose sur l'angle #1 du brief : mettre en lumière l'injustice subie par ces enfants innocents. Les visuels ont ensuite été déclinés sur plusieurs formats.",
+    "gallery": [
+      {
+        "label": "Affiche 4x3"
+      },
+      {
+        "label": "Concept Board complet"
+      },
+      {
+        "label": "Déclinaison abribus"
+      }
+    ]
+  },
+  {
+    "id": "armor-marche-aquatique",
+    "number": "06",
+    "title": "Armor Marche Aquatique",
+    "shortDesc": "Stratégie de communication complète et refonte visuelle pour une association sportive.",
+    "tags": [
+      "Communication",
+      "Identité visuelle",
+      "Réseaux sociaux"
+    ],
+    "thumb": "🌊",
+    "thumbColor": "#1a3d5a",
+    "category": "Année",
+    "year": "2024",
+    "role": "Consultant en communication",
+    "tools": "Meta Business Suite, Brevo, Suite Adobe, Figm",
+    "client": "Entreprise Armor Marche Aquatique",
+    "subtitle": "Accompagnement d'une entreprise pendant cinq mois pour améliorer sa communication globale.",
+    "context": "Armor Marche Aquatique est une entreprise proposant des activités de marche aquatique en Bretagne. Leur communication souffrait d'un manque de cohérence visuelle et d'une présence digitale limitée. Ils avaient besoin d'un accompagnement complet pour professionnaliser leur image.",
+    "mission": "Pendant cinq mois, j'ai accompagné l'association dans la refonte complète de sa communication : nouvelle identité graphique, stratégie de communication sur les réseaux sociaux, création de posts et de contenu visuel, rédaction d'e-mails, enregistrement d'une vidéo promotionnelle et réalisation d'un site internet vitrine.",
+    "results": "L'association dispose désormais d'une identité visuelle cohérente, d'un site internet professionnel et d'une présence active sur les réseaux sociaux. Le benchmark initial a permis d'identifier les bonnes pratiques du secteur et de positionner Armor Marche Aquatique de manière distinctive.",
+    "gallery": [
+      {
+        "label": "Identité visuelle"
+      },
+      {
+        "label": "Post réseaux sociaux #1"
+      },
+      {
+        "label": "Post réseaux sociaux #2"
+      }
+    ]
+  },
+  {
+    "id": "woodblock",
+    "number": "07",
+    "title": "Wood Block",
+    "shortDesc": "Création d'un collectif de beatmakers.",
+    "tags": [
+      "Branding",
+      "E-commerce",
+      "Musique"
+    ],
+    "thumb": "🎵",
+    "thumbColor": "#3d2d1a",
+    "category": "Année",
+    "year": "2023–2024",
+    "role": "Fondateur et Directeur créatif",
+    "tools": "Adobe Photoshop, Figma, FL Studio, Réseaux Sociaux",
+    "client": "Projet personnel",
+    "subtitle": "Un collectif de beatmakers passionné par la musique, tous les services réunis sur un seul site internet.",
+    "context": "Wood Block est un projet personnel né de ma passion pour la production musicale. L'idée était de créer une marque fédérant un collectif de beatmakers et de proposer une plateforme centralisant nos services : production instrumentale, mixage, arrangement et mastering.",
+    "mission": "J'ai conçu l'identité visuelle de la marque (logo, charte graphique, univers visuel), développé la stratégie de communication sur les réseaux sociaux et réalisé le site web e-commerce sur CMS. Parallèlement, j'ai mené une étude des données utilisateurs pour optimiser les campagnes d'e-mailing et la présence en ligne.",
+    "results": "Le site propose un catalogue de beats à l'écoute et à l'achat, un système de commande pour des productions sur mesure, et un blog sur l'univers de la beatmaking. La stratégie de communication a permis de créer une communauté engagée autour du collectif.",
+    "gallery": [
+      {
+        "label": "Site web Wood Block"
+      },
+      {
+        "label": "Post Instagram #1"
+      },
+      {
+        "label": "Post Instagram #2"
+      }
+    ]
+  },
+  {
+    "id": "design-poster",
+    "number": "08",
+    "title": "Design — F1 Posters",
+    "shortDesc": "Collection de 24 affiches design pour chaque circuit GP de Formule 1 2025.",
+    "tags": [
+      "Design graphique",
+      "Illustration",
+      "Sport Auto"
+    ],
+    "thumb": "🏎️",
+    "thumbColor": "#3d1a1a",
+    "category": "Personnel",
+    "year": "2023",
+    "role": "Designer graphique",
+    "tools": "Adobe Photoshop",
+    "client": "Projet personnel — Passion F1",
+    "subtitle": "Collection de posters créatifs représentant chacun des 24 circuits Grand Prix de la saison 2025 de Formule 1.",
+    "context": "En tant que passionné de Formule 1, j'ai voulu allier ma passion du sport automobile à mes compétences en design graphique. L'objectif : créer une collection d'affiches uniques pour chaque Grand Prix de la saison 2025, avec une identité visuelle cohérente tout en reflétant le caractère unique de chaque circuit.",
+    "mission": "Pour chaque affiche, j'ai mené une recherche sur l'identité du circuit (architecture locale, paysages, culture), sélectionné des images de référence sur Getty Images, puis composé un visuel distinctif dans Photoshop. Le défi était de maintenir une cohérence graphique globale (grille, typographie, palette) tout en donnant à chaque poster son caractère unique.",
+    "results": "La collection complète comprend 24 affiches et un calendrier récapitulatif. Parmi les circuits représentés : Melbourne, Sakhir, Jeddah, Shanghai, Miami, Monaco, Barcelona, Spa, Suzuka, et bien d'autres. Le projet démontre ma capacité à travailler sur une série graphique cohérente à grande échelle.",
+    "gallery": [
+      {
+        "label": "Calendrier 2025"
+      },
+      {
+        "label": "GP Monaco"
+      },
+      {
+        "label": "GP Spa-Francorchamps"
+      }
+    ]
+  }
+]
